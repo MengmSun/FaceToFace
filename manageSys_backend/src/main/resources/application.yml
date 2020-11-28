@@ -1,0 +1,35 @@
+spring:
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  mail:
+    host: smtp.qq.com
+    username: 875274671@qq.com
+    password: mnmiwqbmxwftbbef
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+  datasource:
+    url: jdbc:mysql://localhost:3306/face2face?useUnicode=true&characterEncoding=utf-8&serverTimezone=Hongkong&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 
+
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+server:
+  port: 80
+  ssl:
+    key-store: classpath:4454844_www.catchersun.cn.jks
+    key-password: 0zc2vh31
+    key-store-type: JKS
+    enabled: true

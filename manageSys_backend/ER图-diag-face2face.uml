@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="310.75" y="417.5">42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_time_interval</node>
+    <node x="461.75" y="203.5">42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_admin</node>
+    <node x="14.5" y="148.0">42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_interviewee</node>
+    <node x="275.25" y="0.0">42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_user</node>
+    <node x="277.75" y="181.0">42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_interviewer</node>
+    <node x="31.75" y="362.0">42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_record</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_interviewee" target="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_user">
+      <point x="0.0" y="-82.0" />
+      <point x="96.5" y="123.0" />
+      <point x="303.41666666666663" y="123.0" />
+      <point x="-56.333333333333336" y="49.0" />
+    </edge>
+    <edge source="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_admin" target="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_user">
+      <point x="0.0" y="-26.5" />
+      <point x="543.75" y="123.0" />
+      <point x="416.0833333333333" y="123.0" />
+      <point x="56.33333333333334" y="49.0" />
+    </edge>
+    <edge source="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_time_interval" target="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_interviewer">
+      <point x="0.0" y="-48.5" />
+      <point x="41.0" y="49.0" />
+    </edge>
+    <edge source="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_interviewer" target="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_user">
+      <point x="0.0" y="-49.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_record" target="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_interviewee">
+      <point x="-64.75" y="-104.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_record" target="42c8aebd-80e2-46e1-9b77-405e8ed3468d.TABLE:face2face.t_interviewer">
+      <point x="64.75" y="-104.0" />
+      <point x="226.0" y="337.0" />
+      <point x="318.75" y="337.0" />
+      <point x="-41.0" y="49.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="381.0" y="420.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

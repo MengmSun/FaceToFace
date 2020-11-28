@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('iconfont.eot?t=1596807064466'); /* IE9 */
+  src: url('iconfont.eot?t=1596807064466#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */
+      url('data:application/x-font-woff2;charset=utf-8;base64,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')
+      format('woff2'),
+    url('iconfont.woff?t=1596807064466') format('woff'),
+    url('iconfont.ttf?t=1596807064466') format('truetype'),
+    /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+      url('iconfont.svg?t=1596807064466#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 23px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chat:before {
+  content: '\e65b';
+}
+
+.icon-timer:before {
+  content: '\e75f';
+}
+
+.icon-timer-off:before {
+  content: '\e760';
+}
+
+.icon-view:before {
+  content: '\e6ad';
+}
+
+.icon-video:before {
+  content: '\e682';
+}
+
+.icon-mic:before {
+  content: '\e685';
+}
+
+.icon-mic-off:before {
+  content: '\e686';
+}
+
+.icon-video-off:before {
+  content: '\e683';
+}
+
+.icon-view-off:before {
+  content: '\e6aa';
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="face2face.face2face.mapper.TimeIntervalMapper">
+    <resultMap id="TimeIntervalMap" type="TimeInterval">
+        <id property="startTime" column="start_time"/>
+        <id property="endTime" column="end_time"/>
+        <id property="t_user_id" column="t_user_id"/>
+        <association property="interviewer" javaType="Interviewer">
+            <id property="id" column="t_user_id"/>
+            <result property="name" column="name"/>
+            <result property="email" column="email"/>
+        </association>
+    </resultMap>
+    <insert id="add" parameterType="TimeInterval">
+        insert into t_time_interval (start_time, end_time, t_user_id)
+        VALUES (#{startTime},#{endTime},#{interviewer.id});
+
+    </insert>
+    <select id="findList" parameterType="Map" resultMap="TimeIntervalMap">
+        select start_time,end_time,t_time_interval.t_user_id,name,email
+        from t_time_interval,t_interviewer
+        where t_time_interval.t_user_id = t_interviewer.t_user_id
+        and t_time_interval.start_time &gt;= #{startTime}
+        and t_time_interval.end_time &lt;= #{endTime}
+        limit #{offset1},#{offset2}
+    </select>
+    <update id="delete" parameterType="TimeInterval" >
+        delete  from t_time_interval
+        where start_time = #{startTime}
+        and end_time = #{endTime}
+        and t_time_interval.t_user_id = #{interviewer.id};
+    </update>
+    <select id="countList" parameterType="Map" resultType="Integer">
+        select count(*) from t_time_interval ,t_interviewer
+        where t_time_interval.t_user_id = t_interviewer.t_user_id
+        and t_time_interval.start_time &gt;= #{startTime}
+        and t_time_interval.end_time &lt;= #{endTime}
+    </select>
+</mapper>

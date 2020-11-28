@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="face2face.face2face.mapper.IntervieweeMapper">
+    <resultMap id="IntervieweeMap" type="Interviewee">
+        <id property="id" column="t_user_id"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="CV" column="cv"/>
+        <result property="status" column="status"/>
+        <collection property="recordList" ofType="Record">
+            <result property="link" column="link"/>
+            <result property="remark" column="remark"/>
+            <result property="result" column="result"/>
+            <association property="interviewer" javaType="Interviewer">
+                <id property="id" column="t_interviewer_t_user_id"/>
+                <result property="name" column="interviewer_name"/>
+            </association>
+            <association property="interviewTime" javaType="TimeInterval">
+                <id property="startTime" column="start_time"/>
+                <id property="endTime" column="end_time"/>
+            </association>
+        </collection>
+
+    </resultMap>
+    <resultMap id="IntervieweeMap2" type="Interviewee">
+        <id property="id" column="t_user_id"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="CV" column="cv"/>
+        <result property="status" column="status"/>
+        <result property="index" column="index"/>
+        <association property="interviewer" javaType="Interviewer">
+            <id property="id" column="t_interviewer_t_user_id"/>
+            <result property="name" column="interviewer_name"/>
+        </association>
+    </resultMap>
+    <select id="findList" parameterType="Map" resultMap="IntervieweeMap2">
+        select t_interviewee.t_user_id,
+               t_interviewee.email,
+               t_interviewee.name,
+               t_interviewee.cv,
+               t_interviewee.status,
+               t_interviewee.`index`,
+               t_interviewer.name "interviewer_name"
+        from t_interviewee, t_record, t_interviewer
+        where status=#{status}
+          and t_interviewee.t_user_id = t_record.t_interviewee_t_user_id
+          and t_interviewer.t_user_id = t_record.t_interviewer_t_user_id
+          and t_record.`index` = t_interviewee.`index`
+        order by t_interviewee.t_user_id
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="findListUn" parameterType="Map" resultMap="IntervieweeMap2">
+        select t_interviewee.t_user_id,
+               t_interviewee.email,
+               t_interviewee.name,
+               t_interviewee.cv,
+               t_interviewee.status,
+               t_interviewee.`index`
+        from t_interviewee
+        where status=#{status}
+        order by t_user_id
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="countList" parameterType="Map" resultType="Integer">
+        select count(*) from t_interviewee where status=#{status};
+    </select>
+    <select id="findAll" parameterType="Map" resultMap="IntervieweeMap2">
+        select * from t_interviewee
+        order by t_user_id
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="countAll" resultType="Integer">
+        select count(*) from t_interviewee;
+    </select>
+    <select id="findById" parameterType="String" resultMap="IntervieweeMap2">
+        select * from t_interviewee where t_interviewee.t_user_id = #{id};
+    </select>
+    <update id="updateAllocatedStatus" parameterType="Interviewee">
+        update t_interviewee set t_interviewee.status = 'unallocated'
+        where t_interviewee.t_user_id = #{id};
+    </update>
+    <update id="updateUnallocatedStatus" parameterType="Interviewee">
+        update t_interviewee set t_interviewee.status = 'allocated',t_interviewee.`index` = t_interviewee.`index`+1
+        where t_interviewee.t_user_id = #{id};
+
+    </update>
+</mapper>

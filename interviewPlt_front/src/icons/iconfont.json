@@ -1,0 +1,72 @@
+{
+  "id": "1964500",
+  "name": "el-icon-third",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12863385",
+      "name": "chat",
+      "font_class": "chat",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
+      "icon_id": "15421808",
+      "name": "timer",
+      "font_class": "timer",
+      "unicode": "e75f",
+      "unicode_decimal": 59231
+    },
+    {
+      "icon_id": "15421812",
+      "name": "timer_off",
+      "font_class": "timer-off",
+      "unicode": "e760",
+      "unicode_decimal": 59232
+    },
+    {
+      "icon_id": "10140082",
+      "name": "view",
+      "font_class": "view",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "1304984",
+      "name": "Video-1",
+      "font_class": "video",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "1304991",
+      "name": "Voice-1",
+      "font_class": "mic",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "1304994",
+      "name": "Voice-3",
+      "font_class": "mic-off",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "1304988",
+      "name": "Video-3",
+      "font_class": "video-off",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "10140069",
+      "name": "view-off",
+      "font_class": "view-off",
+      "unicode": "e6aa",
+      "unicode_decimal": 59050
+    }
+  ]
+}

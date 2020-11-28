@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="face2face.face2face.mapper.RecordMapper">
+    <resultMap id="RecordMap" type="Record">
+        <id property="interviewee.id" column="t_interviewee_t_user_id"/>
+        <id property="interviewer.id" column="t_interviewer_t_user_id"/>
+        <id property="index" column="index"/>
+        <result property="remark" column="remark"/>
+        <result property="result" column="result"/>
+        <result property="link" column="link"/>
+        <result property="timeInterval.startTime" column="start_time"/>
+        <result property="timeInterval.endTime" column="end_time"/>
+        <result property="score" column="score"/>
+        <association property="interviewee" javaType="Interviewee">
+            <id property="id" column="t_user_id"/>
+            <id property="name" column="name"/>
+        </association>
+        <association property="interviewer" javaType="Interviewer">
+            <id property="id" column="interviewer_id"/>
+            <result property="name" column="interviewer_name"/>
+        </association>
+    </resultMap>
+    <select id="findList" parameterType="Map" resultMap="RecordMap">
+        select *,t_interviewee.name,t_interviewer.name "interviewer_name",t_interviewer.t_user_id "interviewer_id"
+        from t_record,t_interviewee,t_interviewer
+        where t_interviewee.t_user_id = t_record.t_interviewee_t_user_id
+        and t_interviewer.t_user_id = t_record.t_interviewer_t_user_id
+        and t_record.remark is not null
+        order by t_interviewee.t_user_id,t_record.start_time
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="countList" parameterType="Map" resultType="Integer">
+        select count(*) from t_record where t_record.remark is not null;
+    </select>
+    <select id="findOnGoingList" parameterType="Map" resultMap="RecordMap">
+        select *,t_interviewee.name,t_interviewer.name "interviewer_name",t_interviewer.t_user_id "interviewer_id"
+        from t_record,t_interviewee,t_interviewer
+        where t_interviewee.t_user_id = t_record.t_interviewee_t_user_id
+          and t_interviewer.t_user_id = t_record.t_interviewer_t_user_id
+          and t_record.start_time &lt;= #{dNow}
+          and t_record.end_time &gt;= #{dNow}
+        order by t_interviewee.t_user_id,t_record.start_time
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="countOnGoingList" parameterType="Map" resultType="Integer">
+        select count(*)
+        from t_record
+        where t_record.start_time &lt;= #{dNow}
+          and t_record.end_time &gt;= #{dNow};
+    </select>
+    <select id="findUndecidedList" parameterType="Map" resultMap="RecordMap">
+        select *,t_interviewee.name,t_interviewer.name "interviewer_name",t_interviewer.t_user_id "interviewer_id"
+        from t_record,t_interviewee,t_interviewer
+        where t_interviewee.t_user_id = t_record.t_interviewee_t_user_id
+        and t_interviewer.t_user_id = t_record.t_interviewer_t_user_id
+        and (t_record.remark is not null and t_record.result is null )
+        order by t_interviewee.t_user_id,t_record.start_time
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="countUndecidedList" resultType="Integer">
+        select count(*)
+        from t_record
+        where result is null and remark is not null;
+    </select>
+    <select id="findDecidedList" parameterType="Map" resultMap="RecordMap">
+        select *,t_interviewee.name,t_interviewer.name "interviewer_name",t_interviewer.t_user_id "interviewer_id"
+        from t_record,t_interviewee,t_interviewer
+        where t_interviewee.t_user_id = t_record.t_interviewee_t_user_id
+          and t_interviewer.t_user_id = t_record.t_interviewer_t_user_id
+          and (t_record.remark is not null and t_record.result is not null )
+        order by t_interviewee.t_user_id,t_record.start_time
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="countDecidedList" resultType="Integer">
+        select count(*)
+        from t_record
+        where result is not null and remark is not null;
+    </select>
+    <insert id="add" parameterType="Record">
+        insert into t_record (t_interviewer_t_user_id, t_interviewee_t_user_id, remark, result, link, start_time, end_time,`index`)
+        values (#{interviewer.id},#{interviewee.id},#{remark},#{result},#{link},#{timeInterval.startTime},#{timeInterval.endTime},#{index});
+
+    </insert>
+    <update id="updateRemark" parameterType="Record">
+        update t_record set remark=#{remark},score = #{score}
+               where t_record.t_interviewer_t_user_id = #{interviewer.id}
+               and t_record.t_interviewee_t_user_id = #{interviewee.id}
+               and t_record.`index` = #{index};
+    </update>
+    <update id="updateResult" parameterType="Record">
+        update t_record set result=#{result}
+        where t_record.t_interviewer_t_user_id = #{interviewer.id}
+          and t_record.t_interviewee_t_user_id = #{interviewee.id}
+          and t_record.`index` = #{index};
+    </update>
+    <update id="updateLink" parameterType="Record">
+        update t_record set link = #{link}
+        where t_record.t_interviewer_t_user_id = #{interviewer.id}
+          and t_record.t_interviewee_t_user_id = #{interviewee.id}
+          and t_record.`index` = #{index};
+    </update>
+</mapper>

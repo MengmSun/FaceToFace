@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="face2face.face2face.mapper.InterviewerMapper">
+    <resultMap id="InterviewerMap" type="Interviewer">
+        <id property="id" column="t_user_id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <!--collection property="recordList" ofType="Record">
+            <id property="interviewee.id" column="t_interviewee_t_user_id"/>
+            <id property="interviewer.id" column="t_interviewer_t_user_id"/>
+            <result property="remark" column="remark"/>
+            <result property="result" column="result"/>
+            <result property="link" column="link"/>
+            <result property="startTime" column="start_time"/>
+            <result property="endTime" column="end_time"/>
+        </collection-->
+        <collection property="freeTimeList" ofType="TimeInterval">
+            <id property="startTime" column="start_time"/>
+            <id property="endTime" column="end_time"/>
+        </collection>
+    </resultMap>
+    <resultMap id="InterviewerMap2" type="Interviewer">
+        <id property="id" column="t_user_id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+    </resultMap>
+    <select id="findById" parameterType="String" resultMap="InterviewerMap">
+        select t_interviewer.t_user_id,
+               t_interviewer.name,
+               t_interviewer.email,
+               t_time_interval.start_time,
+               t_time_interval.end_time
+        from   t_interviewer,t_time_interval
+        where  t_interviewer.t_user_id = #{id}
+        and    t_interviewer.t_user_id = t_time_interval.t_user_id;
+    </select>
+    <select id="findById2" parameterType="String" resultMap="InterviewerMap2">
+        select t_interviewer.t_user_id,
+               t_interviewer.email,
+               t_interviewer.name
+        from t_interviewer
+        where t_interviewer.t_user_id = #{id};
+    </select>
+    <select id="findAll" parameterType="Map" resultMap="InterviewerMap2">
+        select * from t_interviewer
+        order by t_user_id
+        limit #{offset1},#{offset2};
+    </select>
+    <select id="countAll" resultType="Integer">
+        select count(*) from t_interviewer;
+    </select>
+</mapper>
