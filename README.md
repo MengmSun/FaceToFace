@@ -16,9 +16,9 @@
 
 ![image-20201128164640741](./2.png)
 
-![1](/Users/catcher/Desktop/FaceToFace_git/1.jpg)
+![1](./1.jpg)
 
 分配成功之后会发送邮件给面试官和面试者。
 
-![1](/Users/catcher/Desktop/FaceToFace_git/3.jpg)
+![1](./3.jpg)
 
